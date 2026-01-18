@@ -1,19 +1,21 @@
 ; ---------------------------------------------------------------------------
 
-EB_NULL:					  ; CODE XREF: OnTick+Cj
-		rts
+;EB_NULL:					  ; CODE XREF: OnTick+Cj
+;		rts
 ; ---------------------------------------------------------------------------
 
 ProcessNextCmdImmediately_1:			  ; CODE XREF: OnTick+608j
 						  ; OnTick+6FEj ...
 		moveq	#$00000001,d0
-		bsr.s	LoadNextCmd
-		bra.w	ProcessNextCmd
+		bra.s	GainFourBytesForUpdatePlayerShadowHook
+EB_UpdatePlayerShadowHook:
+		bra.w	EB_UpdatePlayerShadow
 ; ---------------------------------------------------------------------------
 
 ProcessNextCmdImmediately_2:			  ; CODE XREF: OnTick+21Cj
 						  ; OnTick:loc_18356j ...
 		moveq	#$00000002,d0
+GainFourBytesForUpdatePlayerShadowHook:
 		bsr.s	LoadNextCmd
 		bra.w	ProcessNextCmd
 ; End of function OnTick
@@ -2932,3 +2934,6 @@ loc_19306:					  ; CODE XREF: sub_192B6+48j
 ; End of function sub_192B6
 
 ; ---------------------------------------------------------------------------
+
+EB_UpdatePlayerShadow:
+		jmp	(UpdatePlayerShadow).l

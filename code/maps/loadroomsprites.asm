@@ -261,7 +261,7 @@ loc_1973C:					  ; CODE XREF: InitialiseSprites+1DAj
 		bne.w	loc_19842		  ; d2 - width/length
 						  ; d3 - height
 		movem.w	d0,-(sp)
-		jsr	(j_LookupChestContents).l
+		jsr	(LookupChestContents).l
 		move.b	#$01,Flags2(a1)
 		jsr	(j_CheckIfChestOpened).l
 		beq.w	loc_1983E
@@ -566,8 +566,9 @@ loc_199E6:					  ; CODE XREF: InitialiseSprites+41Cj
 
 loc_19A3A:					  ; CODE XREF: InitialiseSprites+24j
 						  ; InitialiseSprites+38j
-		move.w	#$FFFF,(a1)
-		rts
+		jmp	(LoadShadowEntity).l
+		;move.w	#$FFFF,(a1)
+		;rts
 ; END OF FUNCTION CHUNK	FOR InitialiseSprites
 
 ; =============== S U B	R O U T	I N E =======================================

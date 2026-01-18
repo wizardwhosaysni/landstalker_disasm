@@ -31,7 +31,7 @@ OnTick:						  ; CODE XREF: UpdateEntities+1Cp
 ProcessNextCmd:					  ; CODE XREF: OnTick+1C0j
 						  ; OnTick+1C8j ...
 		move.w	BehavParam(a5),d0
-		beq.w	EB_NULL
+		beq.w	locret_178F4
 		andi.w	#$00FF,d0
 		lsl.w	#$02,d0
 		jmp	loc_17918(pc,d0.w)
@@ -245,3 +245,5 @@ loc_17918:					  ; CODE XREF: OnTick+16j
 		bra.w	EB_B66
 ; ---------------------------------------------------------------------------
 		bra.w	EB_B67
+; ---------------------------------------------------------------------------
+		bra.s	EB_UpdatePlayerShadowHook

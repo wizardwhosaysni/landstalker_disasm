@@ -24,7 +24,9 @@ j_PlayEndCredits:				  ; DATA XREF: sub_EAD4:loc_EAEAt
 ; Attributes: thunk
 
 j_LookupChestContents:				  ; DATA XREF: InitialiseSprites+214t
-		jmp	LookupChestContents(pc)
+		;jmp	LookupChestContents(pc)
+		nop
+		rts
 ; End of function j_LookupChestContents
 
 
