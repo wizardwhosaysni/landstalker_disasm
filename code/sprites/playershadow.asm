@@ -97,6 +97,8 @@ ApDoSpCo_loop:
 		bcs.s	ApDoSpCo_next			; shadow sprite Y end lower than compared sprite Y start : no collision
 		cmp.w	Z(a0),d5
 		bcs.s	ApDoSpCo_next			; shadow sprite Z lower than compared sprite Z : no collision
+		tst.b	Flags1(a0)
+		bne.s	ApDoSpCo_next
 		; shadow sprite is above compared sprite Z : compared sprite is a valid candidate
         cmp.w   HitBoxZEnd(a0),d6
 		bhi.s   ApDoSpCo_next
