@@ -50,15 +50,8 @@ UpdatePlayerShadow:
 		andi.b 	#$30,d0
 		beq.s	UpPlSh_hide	
 		bsr.w   ApplyDownwardSpriteCollision
-		bcs.s	UpPlSh_show				; collision found with a sprite below
-		; Apply heightmap instead : centre-based for now, TODO hitbox-based instead
-		movea.w	(Player_HeightmapOffset).l,a1
-		move.w	(a1),GroundHeight(a5)
-		move.b	GroundHeight(a5),d0
-		lsl.b	#$04,d0
-		move.b	d0,FloorHeight(a5)
-		move.b	d0,Z+1(a5)
-		move.b	d0,HitBoxZEnd+1(a5)
+		bcs.s	UpPlSh_show				; collision found with a sprite below : project shadow on sprite
+		bsr.w   ApplyHeightmap			; otherwise, project shadow on map
 UpPlSh_show: 
 		bclr    #$00,Flags1(a5)	
 		bra.s   UpPlSh_end
@@ -119,6 +112,15 @@ ApDoSpCo_noCollision:
 		tst.b	d0                     ; no collision found : clear carry
 ApDoSpCo_end:
         movem.w	(sp)+,d0-d7/a0
+		rts
+
+ApplyHeightmap:
+		move.l	a5,d0
+		move.l	d0,a0
+		move.w	Z(a0),d7
+		jsr		sub_3302
+		move.b	d4,FloorHeight(a0)
+		move.b	d4,Z+1(a0)
 		rts
 
         Align   $10
