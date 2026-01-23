@@ -52,6 +52,10 @@ UpdatePlayerShadow:
 		bsr.w   ApplyDownwardSpriteCollision
 		bcs.s	UpPlSh_show				; collision found with a sprite below : project shadow on sprite
 		bsr.w   ApplyHeightmap			; otherwise, project shadow on map
+		lea		(a5),a1
+		movem.l	a5,-(sp)
+		jsr		sub_44C4				; Update shadow sprite priority flag
+		movem.l	(sp)+,a5
 UpPlSh_show: 
 		bclr    #$00,Flags1(a5)	
 		bra.s   UpPlSh_end
@@ -115,8 +119,7 @@ ApDoSpCo_end:
 		rts
 
 ApplyHeightmap:
-		move.l	a5,d0
-		move.l	d0,a0
+		lea		(a5),a0
 		move.w	Z(a0),d7
 		jsr		sub_3302
 		move.b	d4,FloorHeight(a0)
