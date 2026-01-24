@@ -111,7 +111,7 @@ StatusAnimData:             include "code\graphics\staticimages\statusfx.asm"
                             include "code\gamelogic\gamefuncs.asm"
                             include "code\sprites\spritebehaviourjumptable.asm"
                             include "code\sprites\spritebehaviours.asm"
-                            dcb.b   $200, $FF
+                            PadTo   $194F0
                             include "code\maps\loadroomsprites.asm"
 CustomRoomActions1:         include "code\maps\customroomactions1.asm"
 BigTreeLocations:           incbin  "assets_packed\roomdata\misc\bigtreelocs.bin"
@@ -194,8 +194,10 @@ TilesetData:                include "code\graphics\tileset_data.asm"
                             include "code\sprites\sprites1.asm"
 SpriteBehaviourOffsets:     incbin  "assets_packed\spritedata\behaviouroffsets_jp.bin"
 SpriteBehaviourTable:       incbin  "assets_packed\spritedata\behaviourtable_jp.bin"
-                            Align   $2
-                            include "code\maps\chests1.asm"
+                            include "assets_packed\spritedata\playershadowbehaviour.asm"
+                            ;Align   $2
+                            ;include "code\maps\chests1.asm"
+                            PadTo   $9E786
 RoomChestOffsets:           incbin  "assets_packed\roomdata\chests\chestoffsets_jp.bin"
 ChestContents:              incbin  "assets_packed\roomdata\chests\chestcontents_jp.bin"
                             Align   $2
@@ -214,6 +216,8 @@ RoomMaps:                   include "code\graphics\roommaps_jp.asm"
 RoomPals:                   include "code\palettes\roompals.asm"
 RoomExits:                  incbin  "assets_packed\roomdata\warps\exits.bin"
 RegionCheck:                include "code\system\regioncheck.asm"
+PlayerShadowCode:           include "code\sprites\playershadow.asm"
+                            include "code\maps\chests1.asm"
                             PadTo   $120000
                             include "code\pointertables\sprites\spritegraphicsptr.asm"
 SpriteGfxOffsetTable:       incbin  "assets_packed\spritedata\spritegfxoffsettable.bin"

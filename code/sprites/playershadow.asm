@@ -11,7 +11,11 @@ ShadowEntity:
         dc.b    $03
         dc.b    $56
         dc.b    $90
+	if REGION=JP
+        dc.b    $97
+	else
         dc.b    $98
+	endif		
         dc.b    $FF
         dc.b    $FE						; Specific sentinel value
 
